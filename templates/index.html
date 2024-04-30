@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <title>ZooIndex</title>
+    
+</head>
+<body>
+    <div class="container">
+        <h1>ZooIndex</h1>
+        <form action="/search" method="post" enctype="multipart/form-data">
+            <label for="query_type">Choose Your Query Type:</label><br><br>
+            <input type="radio" id="text" name="query_type" value="text">
+            <label for="text">Text</label>
+            <input type="radio" id="image" name="query_type" value="image">
+            <label for="image">Image</label>
+            <input type="radio" id="audio" name="query_type" value="audio">
+            <label for="audio">Audio</label><br><br>
+            
+            <div id="text_input" style="display:none;">
+                <label for="text_query">Enter Text Query:</label><br>
+                <textarea id="text_query" name="text_query" rows="2" cols="5" style="background-color: #FDF5E6; border-radius: 15px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);"></textarea><br><br>
+            </div>
+        
+            <div id="image_input" style="display:none;">
+                <label for="image_query">Upload Image:</label><br>
+                <input type="file" id="image_query" name="image_query" accept="image/png, image/jpeg"><br><br>
+            </div>
+        
+            <div id="audio_input" style="display:none;">
+                <label for="audio_query">Upload Audio:</label><br>
+                <input type="file" id="audio_query" name="audio_query" accept="audio/mpeg"><br><br>
+            </div>
+        
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    
+    <script>
+        document.querySelectorAll('input[name="query_type"]').forEach((elem) => {
+            elem.addEventListener("change", function() {
+                document.getElementById("text_input").style.display = "none";
+                document.getElementById("image_input").style.display = "none";
+                document.getElementById("audio_input").style.display = "none";
+                document.getElementById(this.value + "_input").style.display = "block";
+            });
+        });
+    </script>    
+</body>
+</html>

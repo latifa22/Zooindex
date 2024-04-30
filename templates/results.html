@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <title>Search Results</title>
+</head>
+<body>
+    <div class="container">
+        <div class="results">
+            <h3>Search Results</h3>
+            {% if results %}
+                {% for result in results %}
+                    {% if result['type'] == 'text' %}
+                        <div class="result">
+                            <h2>Text Result</h2>
+                            <p>{{ result['content'] }}</p>
+                            <p>Similarity: {{ result['similarity'] }}</p>
+                        </div>
+                    {% elif result['type'] == 'image' %}
+                        <div class="result">
+                            <h2>Image Result</h2>
+                            <img src="{{ result['path'] }}" alt="Image Result">
+                            <p>Similarity: {{ result['similarity'] }}</p>
+                        </div>
+                    {% elif result['type'] == 'audio' %}
+                        <div class="result">
+                            <h2>Audio Result</h2>
+                            <audio controls>
+                            <source src="{{ result['path'] }}" type="audio/mpeg">
+                            </audio>
+                            <p>Similarity: {{ result['similarity'] }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        
+        </div>
+        
+    </div>
+</body>
+</html>
